@@ -1237,7 +1237,7 @@ def _regression(
     
     energies = data.target_energy
     forces = torch.cat([atoms.target_forces.view(-1) for atoms in data])
-    virial = torch.cat([atoms.target_stress.view(-1)*atoms.get_volume() for atoms in data])
+    virial = -torch.cat([atoms.target_stress.view(-1)*atoms.get_volume() for atoms in data])
     Y = torch.cat((forces, virial, torch.zeros(L.size(0))))
     
 
